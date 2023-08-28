@@ -1,8 +1,12 @@
 import 'dart:convert';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-class Entry {
+import 'package:floor/floor.dart';
 
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+@entity
+class Entry {
+  
+  @primaryKey
   int id;
   String name;
   String image;
