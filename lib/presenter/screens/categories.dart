@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hyrule/utils/consts/categories_images.dart';
 
-class Categories extends StatefulWidget {
+import '../../utils/consts/categories_images.dart';
+import 'results.dart';
+
+class Categories extends StatelessWidget {
   const Categories({super.key});
-
-  @override
-  State<Categories> createState() => _CategoriesState();
-}
-
-class _CategoriesState extends State<Categories> {
-  final bool _isActive = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +16,14 @@ class _CategoriesState extends State<Categories> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(17.0),
-          child: CustomScrollView(
-            slivers: [
-              SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  childAspectRatio: 1.0,
-                ),
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return Category(imageURL: categoriesImages[index], isActive: false,);
-                  },
-                  childCount: categoriesImages.length,
-                ),
-              )
-            ],
+          child: GridView(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+            ),
+            children:
+                categories.keys.map((e) => Category(category: e)).toList(),
           ),
         ),
       ),
@@ -46,29 +32,39 @@ class _CategoriesState extends State<Categories> {
 }
 
 class Category extends StatelessWidget {
-  const Category({
-    super.key, required this.imageURL, this.isActive = false,
-  });
-  final String imageURL;
-  final bool isActive;
+  const Category({super.key, required this.category});
+  final String category;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.0),
-        border: Border.all(width: 2.0, color: const Color(0xFF00497D)),
-        boxShadow: [
-          BoxShadow(
-              blurRadius: 6.0,
-              color: const Color(0XFF00EBFF).withOpacity(0.2),
-              blurStyle: BlurStyle.outer)
-        ],
-      ),
-      margin: EdgeInsets.zero,
-      child: Center(
-        child: Image(
-          image: AssetImage(imageURL),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Results(
+              category: category,
+            ),
+          ),
+        );
+      },
+      borderRadius: BorderRadius.circular(16.0),
+      child: Ink(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.0),
+          border: Border.all(width: 2.0, color: const Color(0xFF0079CF)),
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 6.0,
+                color: const Color(0XFF0079CF).withOpacity(0.2),
+                blurStyle: BlurStyle.outer)
+          ],
+        ),
+        child: Center(
+          child: Image(
+            color: const Color(0xFF0079CF),
+            image: AssetImage('$path$category.png'),
+          ),
         ),
       ),
     );

@@ -1,7 +1,9 @@
-List<String> categoriesImages = [
-  'assets/images/creature.png',
-  'assets/images/equipment.png',
-  'assets/images/material.png',
-  'assets/images/monsters.png',
-  'assets/images/treasure.png',
-];
+const String path = 'assets/images/';
+
+const Map<String, String> categories = {
+  'creature' : 'Creature',
+  'equipment' : 'Equipment',
+  'material' : 'Material',
+  'monsters' : 'Monsters',
+  'treasure' : 'Treasure',
+};

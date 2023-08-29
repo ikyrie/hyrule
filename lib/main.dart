@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hyrule/presenter/screens/results.dart';
-
+import 'package:hyrule/presenter/screens/categories.dart';
 
 void main() {
   runApp(const Hyrule());
@@ -18,7 +17,7 @@ class Hyrule extends StatelessWidget {
         colorSchemeSeed: Colors.blue,
       ),
       title: "Hyrule",
-      home: const Results(),
+      home: const Categories(),
     );
   }
 }
