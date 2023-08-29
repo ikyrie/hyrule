@@ -1,9 +1,9 @@
 enum Categories {
-  treasure('treasure', 'TREASURE'),
-  monsters('monsters', 'MONSTERS'),
-  materials('materials', 'MATERIALS'),
-  equipment('equipment', 'EQUIPMENT'),
-  creatures('creatures', 'CREATURES');
+  treasure('Treasure', 'TREASURE'),
+  monsters('Monsters', 'MONSTERS'),
+  materials('Materials', 'MATERIALS'),
+  equipment('Equipment', 'EQUIPMENT'),
+  creatures('Creatures', 'CREATURES');
 
   final String name;
   final String code;
