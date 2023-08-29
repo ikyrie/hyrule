@@ -38,7 +38,6 @@ class Results extends StatelessWidget {
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasData){
-                    print(snapshot.data);
                     return CustomScrollView(
                       slivers: [
                         SliverList(
