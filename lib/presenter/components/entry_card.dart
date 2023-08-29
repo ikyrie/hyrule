@@ -14,7 +14,8 @@ class EntryCard extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       margin: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
       child: Dismissible(
-        direction: isSaved ? DismissDirection.endToStart : DismissDirection.none,
+        direction:
+            isSaved ? DismissDirection.endToStart : DismissDirection.none,
         key: ValueKey<int>(entry.id),
         background: Container(
           color: Colors.redAccent,
@@ -71,8 +72,12 @@ class EntryCard extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(entry.name),
-                                  Text(entry.description),
+                                  Text(entry.name.toUpperCase()),
+                                  Text(
+                                    entry.description,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 5,
+                                  ),
                                 ],
                               ),
                             ],
@@ -83,7 +88,8 @@ class EntryCard extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 8.0),
                   child: Wrap(
                     spacing: 8.0,
                     children: [
@@ -92,7 +98,6 @@ class EntryCard extends StatelessWidget {
                       Chip(label: Text(entry.category)),
                       Chip(label: Text(entry.category)),
                       Chip(label: Text(entry.category)),
-
                       if (entry.dlc)
                         const Padding(
                           padding: EdgeInsets.only(left: 8.0),

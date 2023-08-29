@@ -25,7 +25,7 @@ class Details extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                  child: Text(entry.name),
+                  child: Text(entry.name.toUpperCase()),
                 ),
               ),
               SliverToBoxAdapter(

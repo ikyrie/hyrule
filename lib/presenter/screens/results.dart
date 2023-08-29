@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hyrule/utils/consts/categories_images.dart';
 
-import '../../utils/consts/examples.dart';
+import '../../controllers/api_controller.dart';
+import '../../utils/consts/categories_images.dart';
 import '../components/entry_card.dart';
 import 'favorites.dart';
 
 class Results extends StatelessWidget {
-  const Results({Key? key, required this.category}) : super(key: key);
+  Results({Key? key, required this.category}) : super(key: key);
   final String category;
+
+  final ApiController apiController = ApiController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +30,38 @@ class Results extends StatelessWidget {
             )
           ],
         ),
-        body: CustomScrollView(
-          slivers: [
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return EntryCard(
-                    entry: entryExample,
-                  );
-                },
-                childCount: 10,
-              ),
-            ),
-          ],
-        ),
+        body: FutureBuilder(
+            future: apiController.getEntriesByCategory(category: category),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.active:
+                  break;
+                case ConnectionState.done:
+                  if (snapshot.hasData){
+                    print(snapshot.data);
+                    return CustomScrollView(
+                      slivers: [
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (BuildContext context, int index) {
+                              return EntryCard(
+                                entry: snapshot.data![index],
+                              );
+                            },
+                            childCount: snapshot.data!.length,
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                  break;
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  return const Center(child: CircularProgressIndicator(),);
+              }
+              return Container();
+            }),
       ),
     );
   }
