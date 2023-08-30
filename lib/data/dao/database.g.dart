@@ -85,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Entry` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `image` TEXT NOT NULL, `description` TEXT NOT NULL, `category` TEXT NOT NULL, `dlc` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `Entry` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `image` TEXT NOT NULL, `description` TEXT NOT NULL, `category` TEXT NOT NULL, `commonLocations` TEXT NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -113,7 +113,7 @@ class _$EntryDao extends EntryDao {
                   'image': item.image,
                   'description': item.description,
                   'category': item.category,
-                  'dlc': item.dlc ? 1 : 0
+                  'commonLocations': item.commonLocations
                 }),
         _entryDeletionAdapter = DeletionAdapter(
             database,
@@ -125,7 +125,7 @@ class _$EntryDao extends EntryDao {
                   'image': item.image,
                   'description': item.description,
                   'category': item.category,
-                  'dlc': item.dlc ? 1 : 0
+                  'commonLocations': item.commonLocations
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -147,7 +147,7 @@ class _$EntryDao extends EntryDao {
             image: row['image'] as String,
             description: row['description'] as String,
             category: row['category'] as String,
-            dlc: (row['dlc'] as int) != 0));
+            commonLocations: row['commonLocations'] as String));
   }
 
   @override

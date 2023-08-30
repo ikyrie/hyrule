@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:floor/floor.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/models/entry.dart';
@@ -94,18 +98,7 @@ class EntryCard extends StatelessWidget {
                         vertical: 8.0, horizontal: 8.0),
                     child: Wrap(
                       spacing: 8.0,
-                      children: [
-                        Chip(label: Text(entry.category)),
-                        Chip(label: Text(entry.category)),
-                        Chip(label: Text(entry.category)),
-                        Chip(label: Text(entry.category)),
-                        Chip(label: Text(entry.category)),
-                        if (entry.dlc)
-                          const Padding(
-                            padding: EdgeInsets.only(left: 8.0),
-                            child: Chip(label: Text('DLC')),
-                          ),
-                      ],
+                      children: entry.commonLocationsConverter().map((e) => Chip(label: Text(e))).toList(),
                     ),
                   ),
                 )

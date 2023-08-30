@@ -34,11 +34,6 @@ class Details extends StatelessWidget {
                   child: Row(
                     children: [
                       Chip(label: Text(entry.category)),
-                      if (entry.dlc)
-                        const Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Chip(label: Text('DLC')),
-                        ),
                     ],
                   ),
                 ),

@@ -8,6 +8,6 @@ Entry entryExample = Entry(
   description:
       'Lorem ipsum dolor sit amet consectetur. Sit quis sit odio vitae a aliquet ultrices amet enim posuere.',
   category: 'Creatures',
-  dlc: true,
+  commonLocations: 'Hyrule, Hyrule',
 );
 
