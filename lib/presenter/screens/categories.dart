@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../utils/consts/categories_images.dart';
 import '../components/category.dart';
+import 'favorites.dart';
 
 class Categories extends StatelessWidget {
   const Categories({super.key});
@@ -11,8 +12,20 @@ class Categories extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Escolha a categoria:'),
+          title: const Text('Escolha a categoria'),
           centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Favorites(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.bookmark),
+            )
+          ]
         ),
         body: Padding(
           padding: const EdgeInsets.all(17.0),
