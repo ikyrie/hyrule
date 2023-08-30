@@ -42,7 +42,7 @@ class EntryCard extends StatelessWidget {
               );
             },
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
                   height: 180,
@@ -87,23 +87,26 @@ class EntryCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 8.0),
-                  child: Wrap(
-                    spacing: 8.0,
-                    children: [
-                      Chip(label: Text(entry.category)),
-                      Chip(label: Text(entry.category)),
-                      Chip(label: Text(entry.category)),
-                      Chip(label: Text(entry.category)),
-                      Chip(label: Text(entry.category)),
-                      if (entry.dlc)
-                        const Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Chip(label: Text('DLC')),
-                        ),
-                    ],
+                Container(
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 8.0),
+                    child: Wrap(
+                      spacing: 8.0,
+                      children: [
+                        Chip(label: Text(entry.category)),
+                        Chip(label: Text(entry.category)),
+                        Chip(label: Text(entry.category)),
+                        Chip(label: Text(entry.category)),
+                        Chip(label: Text(entry.category)),
+                        if (entry.dlc)
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Chip(label: Text('DLC')),
+                          ),
+                      ],
+                    ),
                   ),
                 )
               ],
