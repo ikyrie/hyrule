@@ -31,10 +31,9 @@ class Details extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                  child: Row(
-                    children: [
-                      Chip(label: Text(entry.category)),
-                    ],
+                  child: Wrap(
+                    spacing: 8.0,
+                    children: entry.commonLocationsConverter().map((e) => Chip(label: Text(e))).toList(),
                   ),
                 ),
               ),
