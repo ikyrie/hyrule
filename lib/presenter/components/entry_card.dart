@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hyrule/controllers/dao_controller.dart';
 
 import '../../domain/models/entry.dart';
 import '../screens/details.dart';
 
 class EntryCard extends StatelessWidget {
-  const EntryCard({super.key, required this.entry, this.isSaved = false});
+  EntryCard({super.key, required this.entry, this.isSaved = false});
   final Entry entry;
   final bool isSaved;
+  final DaoController daoController = DaoController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +30,9 @@ class EntryCard extends StatelessWidget {
           ),
         ),
         onDismissed: (direction) {
+          daoController.removeEntry(entry: entry);
           ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('deletado')));
+              .showSnackBar(const SnackBar(content: Text('Deletado')));
         },
         child: InkWell(
             onTap: () {
