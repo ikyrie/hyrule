@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hyrule/controllers/dao_controller.dart';
 
-import '../../utils/consts/examples.dart';
 import '../components/entry_card.dart';
 
 class Favorites extends StatelessWidget {
@@ -24,7 +23,7 @@ class Favorites extends StatelessWidget {
               case ConnectionState.active:
                 break;
               case ConnectionState.waiting:
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               case ConnectionState.done:
