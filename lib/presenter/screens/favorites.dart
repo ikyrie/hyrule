@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hyrule/controllers/dao_controller.dart';
 
 import '../../utils/consts/examples.dart';
 import '../components/entry_card.dart';
 
 class Favorites extends StatelessWidget {
-  const Favorites({super.key});
+  Favorites({super.key});
+  final DaoController daoController = DaoController();
 
   @override
   Widget build(BuildContext context) {
@@ -13,20 +15,30 @@ class Favorites extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Itens Salvos"),
         ),
-        body: CustomScrollView(
-          slivers: [
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return EntryCard(
-                    entry: entryExample,
-                    isSaved: true,
+        body: FutureBuilder(
+          future: daoController.getSavedEntries(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.active:
+                break;
+              case ConnectionState.waiting:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              case ConnectionState.done:
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    itemBuilder: (context, index) =>
+                        EntryCard(entry: snapshot.data![index], isSaved: true),
+                    itemCount: snapshot.data!.length,
                   );
-                },
-                childCount: 3,
-              ),
-            ),
-          ],
+                }
+              default:
+            }
+            return Container();
+          },
         ),
       ),
     );

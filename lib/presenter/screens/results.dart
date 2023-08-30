@@ -22,7 +22,7 @@ class Results extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const Favorites(),
+                    builder: (context) => Favorites(),
                   ),
                 );
               },

@@ -1,11 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:hyrule/controllers/dao_controller.dart';
 
 import '../../domain/models/entry.dart';
 
 class Details extends StatelessWidget {
-  const Details({super.key, required this.entry});
+  Details({super.key, required this.entry});
   final Entry entry;
+  final DaoController daoController = DaoController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,11 @@ class Details extends StatelessWidget {
           title: const Text("Detalhes"),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            daoController.addEntry(entry: entry);
+            ScaffoldMessenger.of(context)
+              .showSnackBar(const SnackBar(content: Text('Favoritado')));
+          },
           child: const Icon(Icons.bookmark),
         ),
         body: Padding(
