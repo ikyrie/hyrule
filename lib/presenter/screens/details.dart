@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hyrule/controllers/dao_controller.dart';
+import 'package:hyrule/theme.dart';
 
 import '../../domain/models/entry.dart';
 
@@ -31,7 +32,7 @@ class Details extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                  child: Text(entry.name.toUpperCase()),
+                  child: Text(entry.name.toUpperCase(), style: EntryDecoration.titleText,),
                 ),
               ),
               SliverToBoxAdapter(

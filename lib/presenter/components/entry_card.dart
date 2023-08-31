@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hyrule/controllers/dao_controller.dart';
 
+import '../../controllers/dao_controller.dart';
 import '../../domain/models/entry.dart';
+import '../../theme.dart';
 import '../screens/details.dart';
 
 class EntryCard extends StatelessWidget {
@@ -55,11 +56,15 @@ class EntryCard extends StatelessWidget {
                       Flexible(
                         flex: 1,
                         fit: FlexFit.tight,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image(
-                            image: NetworkImage(entry.image),
-                            fit: BoxFit.cover,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 16.0, horizontal: 8.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: DecorationImage(
+                              image: NetworkImage(entry.image),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
@@ -67,21 +72,21 @@ class EntryCard extends StatelessWidget {
                         flex: 2,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 8.0),
+                              horizontal: 8.0, vertical: 16.0),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(entry.name.toUpperCase()),
-                                  Text(
-                                    entry.description,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 5,
-                                  ),
-                                ],
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Text(entry.name.toUpperCase(), style: EntryDecoration.titleText,),
+                              ),
+                              Flexible(
+                                child: Text(
+                                  entry.description,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 5,
+                                ),
                               ),
                             ],
                           ),
@@ -91,13 +96,23 @@ class EntryCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondaryContainer),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 8.0, horizontal: 8.0),
                     child: Wrap(
                       spacing: 8.0,
-                      children: entry.commonLocationsConverter().map((e) => Chip(label: Text(e))).toList(),
+                      children: entry
+                          .commonLocationsConverter()
+                          .map(
+                            (e) => Chip(
+                                label: Text(e),
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer),
+                          )
+                          .toList(),
                     ),
                   ),
                 )
